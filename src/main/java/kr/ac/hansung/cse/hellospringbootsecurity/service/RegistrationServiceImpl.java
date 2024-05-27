@@ -30,7 +30,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     public MyUser createUser(MyUser user, List<MyRole> userRoles) {
         for (MyRole ur : userRoles) {
-            if (!roleRepository.existsByRolename(ur.getRolename())) {
+            if (roleRepository.findByRolename(ur.getRolename()).isEmpty()) {
                 roleRepository.save(ur);
             }
         }
