@@ -10,7 +10,11 @@
     <h2> 안녕하세요. 스프링 부트 보안 사이트에 오신 것을 환영합니다 </h2>
     <div sec:authorize="isAuthenticated()">
         <p>Welcome <span sec:authentication="principal.username">User</span></p>
-        <p><a th:href="@{/logout}">Logout</a></p>
+       <!-- <p><a th:href="@{/logout}">Logout</a></p>-->
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="LogOut"/>
+        </form>
+
 
         <div sec:authorize="hasRole('ROLE_ADMIN')">
             <h3>You will see this only if you are ADMIN</h3>

@@ -8,7 +8,10 @@
 </head>
 <body>
     <p>Welcome Administrator(<span sec:authentication="principal.username">User</span>)</p>
-    <p><a th:href="@{/logout}">Logout</a></p>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="LogOut"/>
+    </form>
 </body>
 
 </html>

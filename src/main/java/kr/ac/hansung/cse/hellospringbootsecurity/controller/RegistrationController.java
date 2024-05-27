@@ -36,10 +36,16 @@ public class RegistrationController {
             return "signup";
         }
         else {
-            MyRole role = registrationService.findByRolename("ROLE_USER");
-
             List<MyRole> userRoles = new ArrayList<>();
+
+            MyRole role = registrationService.findByRolename("ROLE_USER");
             userRoles.add(role);
+
+            // 특정 이메일 주소인 경우 ADMIN 역할 추가
+            if ("admin@hansung.ac.kr".equals(user.getEmail())) {
+                MyRole roleAdmin = registrationService.findByRolename("ROLE_ADMIN");
+                userRoles.add(roleAdmin);
+            }
 
             registrationService.createUser(user, userRoles);
 

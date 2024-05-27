@@ -30,7 +30,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     public MyUser createUser(MyUser user, List<MyRole> userRoles) {
         for (MyRole ur : userRoles) {
-            roleRepository.save(ur);
+            if (!roleRepository.existsByRolename(ur.getRolename())) {
+                roleRepository.save(ur);
+            }
         }
 
         // generate new Bcrypt hash
@@ -54,7 +56,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     public MyRole findByRolename(String rolename) {
         Optional<MyRole> role = roleRepository.findByRolename(rolename);
-        return role.orElseGet(() -> new MyRole("ROLE_USER"));
+        return role.orElseGet(() -> new MyRole(rolename));
     }
 
 }
